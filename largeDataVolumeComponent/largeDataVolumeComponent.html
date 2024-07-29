@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Accounts" icon-name="standard:account">
+        <div slot="actions">
+            <lightning-input
+                type="search"
+                label="Search"
+                placeholder="Search accounts..."
+                onchange={handleSearch}
+                class="slds-m-right_small"
+            ></lightning-input>
+        </div>
+        <div class="slds-m-around_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+            </template>
+            <template if:false={isLoading}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={accounts}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+                <div class="slds-m-top_medium slds-grid slds-grid_align-spread">
+                    <div>
+                        <lightning-button label="Previous" onclick={handlePrevious} disabled={isPreviousDisabled}></lightning-button>
+                    </div>
+                    <div>
+                        <lightning-button label="Next" onclick={handleNext} disabled={isNextDisabled}></lightning-button>
+                    </div>
+                </div>
+                <p class="slds-m-top_small slds-text-align_center">Page <b>{pageNumber}</b> of <b>{totalPages}</b></p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
